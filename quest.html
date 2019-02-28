@@ -6,32 +6,38 @@
   </head> 
   <body>
     <script>
+		var counter = 4;
 		var RealData = {};
 		var testData = {
-			stageNumbers : [1, 2, 3, 4],
+			stageNumbers : [1, 2, 3, 4], //
 			stageConditions : ['Исходные условия', 'Завязка сюжета', 'Развитие ситуации', 'Финал'],
 			continueWays : ['Пойти налево', 'Пойти направо', 'Не сворачивать', 'Развернуться и уйти'],
 			finalKinds : ['Вы потеряли коня', 'Ваше копье сломалось', 'Вы нашли клад', 'Вы заблудились']
 		};
 		var bigQuest = function(x)	{
-			let act	= prompt('Твой ход! [1..4]');
-			let actResult = {
-				stg : x.stageNumbers[act],
-				cnd : x.stageConditions[act],
-				fnl : x.finalKinds[act],
-			}
-			console.log(actResult);
-			alert(actResult.cnd + '. ' + actResult.fnl);
-			return actResult;
+			let act	= prompt('Твой ход! [1..4]') - 1;
+			console.log(act);
+				if ((act >= 0) && (act <= 3)) 	{										
+					let actResult = {
+						stg : x.stageNumbers[act],
+						cnd : x.stageConditions[act],
+						fnl : x.finalKinds[act],
+					}
+				console.log(actResult);
+				alert(actResult.cnd + '. ' + actResult.fnl);
+				return actResult;
+				}
 		}
+		
+//===============		
 		
 		var letsPlay = confirm('Сыграем?');
 		if (letsPlay == true)	{
 			console.log('Игра началась');
-			console.log(bigQuest(testData));
-			//console.log(actResult);
-// ДОБАВИТЬ СЧЕТЧИК ХОДОВ			
-			
+				for (i = 1; i <= counter; i++)	{
+					bigQuest(testData);				
+				}
+				alert('На сегодня хватит!');
 		}	else {
 			alert ('Пока! Заходи еще!');
 		}
