@@ -252,90 +252,44 @@
     		},
 		};
 		var x = realData;
-		/*var testData = {
-			tourBranch01 : {
-				text: 'Текст 01',
-				answer: {
-					v1 : 'Ответ 1 - 1',	
-					v2 : 'Ответ 1 - 2'
-				},
-				jump: {
-					v1 : 'Метка перехода 1 - 1',
-					v2 : 'Метка перехода 1 - 2'
-				}
-			},
-			tourBranch02 : {
-				text: 'Текст 02',
-				answer: {
-					v1 : 'Ответ 2 - 1',	
-					v2 : 'Ответ 2 - 2'
-				},
-				jump: {
-					v1 : 'Метка перехода 2 - 1',
-					v2 : 'Метка перехода 2 - 2'
-				}
-			},
-			tourBranch03 : {
-				text: 'Текст 03',
-				answer: {
-					v1 : 'Ответ 3 - 1',	
-					v2 : 'Ответ 3 - 2'
-				},
-				jump: {
-					v1 : 'Метка перехода 3 - 1',
-					v2 : 'Метка перехода 3 - 2'
-				}
-			},
-			tourBranch04 : {
-				text: 'Текст 04',
-				answer: {
-					v1 : 'Ответ 4 - 1',	
-					v2 : 'Ответ 4 - 2'
-				},
-				jump: {
-					v1 : 'Метка перехода 4 - 1',
-					v2 : 'Метка перехода 4 - 2'
-				},
-			}
-		};*/
-		// var checkJump = function(x)	{
-				
-		//};
-		var goToBranch = function(y)	{	// Обработка ответа игрока с переходом на соотв. ветку квеста
-				while (x[y].answer != undefined) { // Если в этой ветке квеста ответы предусмотрены (не пустые)
+		var finalBranches = [14, 15]; // Финишные номера
+		var final = function(y)	{	// Обработка выпавшего финишного номера
+			console.log('Здесь должна быть обработка финиша');
+			alert (x[y].text);
+			alert ('До новых встреч!');
+			//break;
+		};
+		var goToBranch = function(y)	{	// Обработка ответа игрока с переходом на соотв. ветку квеста	
+				let checkFinal = function(x)	{	// Проверка соответствия номер перехода с финишными номерами
+					for (let i = 0; i <= finalBranches.length - 1; i++)	{
+						console.log('i = ' + i);
+						console.log('Проверка ' + x +' по финишным номерам');
+						if (finalBranches[i] == x)	{
+							console.log('Финишный номер совпал с ' + x);
+							return i;
+						}						
+						console.log('Финишные номера не совпали с ' + x);
+					}
+						return -1;
+						//break;
+				};
 					let act =+ prompt('Вариант ' + y + '\n' + x[y].text + '\nВаш выбор: \n' + 	x[y].answer[1] + '\n' + x[y].answer[2]); // Получение ответа игрока
 					console.log('Выбран ответ ' + act);
 					console.log('Переходим на ' + x[y].jump[act]);
+					if (checkFinal(x[y].jump[act]) >= 0)	{	// Проверка на соответствие финишным номерам
+						final(x[y].jump[act]);
+					}
 					goToBranch (x[y].jump[act]); 
-				}
-				console.log('Приплыли'); // Если в данной ветке квеста ответ игрока не предусмотрен (пустой)
-				//break;
+				//console.log('Приплыли'); // Если в данной ветке квеста ответ игрока не предусмотрен (пустой)
 			};
-		/*var bigQuest = function(x)	{
-			goToBranch = function(y)	{	// Обработка ответа игрока с переходом на соотв. ветку квеста
-				while ((x[y].answer[1]) != null) {
-					let act =+ prompt('Вариант ' + y + '\n' + x[y].text + '\nВаш выбор: \n' + 	x[y].answer[1] + '\n' + x[y].answer[2]); // Получение ответа игрока
-					console.log('Выбран ответ ' + act);
-				while (typeof(x[y].jump[act]) != null) {
-				}
-					console.log('Переходим на ' + x[y].jump[act]);
-					goToBranch (x[y].jump[act]);
-				}
-				console.log('Приплыли');
-				break;
-			};			
-		};*/
 		
 //===============		
 		
 		var letsPlay = confirm('Сыграем?');
 		if (letsPlay == true)	{
 			console.log('Игра началась');
-			//bigQuest(realData);				
 			goToBranch (0);
 			alert('На сегодня хватит!');
-		}	else {
-			alert ('Пока! Заходи еще!');
 		}
 		
     </script>
