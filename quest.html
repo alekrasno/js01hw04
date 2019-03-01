@@ -6,9 +6,9 @@
   </head> 
   <body>
     <script>
-		var counter = 4;
-		var realData = {
-			0: {
+		// var counter = 4;
+		var realData = { // Данные квеста
+			0: {		// Стартовая ветка квеста. На остальные переход осуществляется в зависимости от ответа игрока
         		text: 'Вы живёте в тихой и уютной деревеньке на окрайне страны.\n' +
         			'Здесь есть практчески всё: речка, лес, горы, озеро, луга и поля, есть даже школа в соседнем селе.\n' +
         			'Сейчас начало лета, воскресенье, раннее утро, Вы просыпаетесь и собираетесь ...\n',
@@ -251,7 +251,8 @@
         		}
     		},
 		};
-		var testData = {
+		var x = realData;
+		/*var testData = {
 			tourBranch01 : {
 				text: 'Текст 01',
 				answer: {
@@ -296,48 +297,42 @@
 					v2 : 'Метка перехода 4 - 2'
 				},
 			}
-		};
-		var bigQuest = function(x)	{
-			//console.log(x[0].answer);
-			let act =+ prompt(x[0].text + '\nВаш выбор: \n' + x[0].answer[1] + '\n' + x[0].answer[2]);
-			//console.log (act, typeof(act));
-			//console.log(x[0].jump[2], typeof(x[0].jump[2]));
-			switch (act)	{
-					case x[0].jump[1] :
-						console.log(x[0].jump[1]);
-						//alert(x[0].jump[0]);
-						break;
-					case x[0].jump[2] :
-						console.log(x[0].jump[2]);
-						//alert(x[0].jump[1]);
-						break;
-					default : 
-						alert ('Неправильно набран номер');
-			}
-			//console.log(x.tourBranch01.answer.v1);
-			
-/*			for (i = 1; i <= counter; i++)	{
+		};*/
+		// var checkJump = function(x)	{
 				
-				let act	= prompt('Твой ход! [1..' + counter + ']') - 1;
-				console.log(act);
-					if ((act >= 0) && (act <= 3)) 	{										
-						let actResult = {
-							stg : x.tourBranch[act],
-							cnd : x.stageConditions[act],
-							fnl : x.finalKinds[act],
-						}
-					console.log(actResult);
-					alert(actResult.cnd + '. ' + actResult.fnl);
-					return actResult;
-				}*/
-			}
+		//};
+		var goToBranch = function(y)	{	// Обработка ответа игрока с переходом на соотв. ветку квеста
+				while (x[y].answer != undefined) { // Если в этой ветке квеста ответы предусмотрены (не пустые)
+					let act =+ prompt('Вариант ' + y + '\n' + x[y].text + '\nВаш выбор: \n' + 	x[y].answer[1] + '\n' + x[y].answer[2]); // Получение ответа игрока
+					console.log('Выбран ответ ' + act);
+					console.log('Переходим на ' + x[y].jump[act]);
+					goToBranch (x[y].jump[act]); 
+				}
+				console.log('Приплыли'); // Если в данной ветке квеста ответ игрока не предусмотрен (пустой)
+				//break;
+			};
+		/*var bigQuest = function(x)	{
+			goToBranch = function(y)	{	// Обработка ответа игрока с переходом на соотв. ветку квеста
+				while ((x[y].answer[1]) != null) {
+					let act =+ prompt('Вариант ' + y + '\n' + x[y].text + '\nВаш выбор: \n' + 	x[y].answer[1] + '\n' + x[y].answer[2]); // Получение ответа игрока
+					console.log('Выбран ответ ' + act);
+				while (typeof(x[y].jump[act]) != null) {
+				}
+					console.log('Переходим на ' + x[y].jump[act]);
+					goToBranch (x[y].jump[act]);
+				}
+				console.log('Приплыли');
+				break;
+			};			
+		};*/
 		
 //===============		
 		
 		var letsPlay = confirm('Сыграем?');
 		if (letsPlay == true)	{
 			console.log('Игра началась');
-			bigQuest(realData);				
+			//bigQuest(realData);				
+			goToBranch (0);
 			alert('На сегодня хватит!');
 		}	else {
 			alert ('Пока! Заходи еще!');
