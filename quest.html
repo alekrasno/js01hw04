@@ -253,12 +253,6 @@
 		};
 		var x = realData;
 		var finalBranches = [14, 15]; // Финишные номера
-		var final = function(y)	{	// Обработка выпавшего финишного номера
-			console.log('Здесь должна быть обработка финиша');
-			alert (x[y].text);
-			alert ('До новых встреч!');
-			//break;
-		};
 		var goToBranch = function(y)	{	// Обработка ответа игрока с переходом на соотв. ветку квеста	
 				let checkFinal = function(x)	{	// Проверка соответствия номер перехода с финишными номерами
 					for (let i = 0; i <= finalBranches.length - 1; i++)	{
@@ -271,16 +265,17 @@
 						console.log('Финишные номера не совпали с ' + x);
 					}
 						return -1;
-						//break;
 				};
 					let act =+ prompt('Вариант ' + y + '\n' + x[y].text + '\nВаш выбор: \n' + 	x[y].answer[1] + '\n' + x[y].answer[2]); // Получение ответа игрока
 					console.log('Выбран ответ ' + act);
 					console.log('Переходим на ' + x[y].jump[act]);
 					if (checkFinal(x[y].jump[act]) >= 0)	{	// Проверка на соответствие финишным номерам
-						final(x[y].jump[act]);
+						//console.log('Здесь должна быть обработка финиша');
+						alert (x[y].text);
+						alert ('До новых встреч!');
+						return ;						
 					}
 					goToBranch (x[y].jump[act]); 
-				//console.log('Приплыли'); // Если в данной ветке квеста ответ игрока не предусмотрен (пустой)
 			};
 		
 //===============		
