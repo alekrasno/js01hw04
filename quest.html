@@ -298,15 +298,18 @@
 			}
 		};
 		var bigQuest = function(x)	{
-			//console.log(x.tourBranch01.answer);
-			let act =+ prompt(x.tourBranch0.text + '\nВаш выбор: \n' + x.tourBranch0.answer.v1 + '\n' + x.tourBranch0.answer.v2);
+			//console.log(x[0].answer);
+			let act =+ prompt(x[0].text + '\nВаш выбор: \n' + x[0].answer[1] + '\n' + x[0].answer[2]);
 			//console.log (act, typeof(act));
+			//console.log(x[0].jump[2], typeof(x[0].jump[2]));
 			switch (act)	{
-					case 1 :
-						alert(x.tourBranch0.jump.v1);
+					case x[0].jump[1] :
+						console.log(x[0].jump[1]);
+						//alert(x[0].jump[0]);
 						break;
-					case 2 :
-						alert(x.tourBranch0.jump.v2);
+					case x[0].jump[2] :
+						console.log(x[0].jump[2]);
+						//alert(x[0].jump[1]);
 						break;
 					default : 
 						alert ('Неправильно набран номер');
