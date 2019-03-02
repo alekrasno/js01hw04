@@ -255,24 +255,19 @@
 		var goToBranch = function(y)	{	// Обработка ответа игрока с переходом на соотв. ветку квеста	
 				let checkFinal = function(x)	{	// Проверка соответствия номер перехода с финишными номерами
 					for (let i = 0; i <= finalBranches.length - 1; i++)	{
-						//console.log('i = ' + i);
-						//console.log('Проверка ' + x +' по финишным номерам');
 						if (finalBranches[i] == x)	{
-						//	console.log('Финишный номер совпал с ' + x);
 							return i;
 						}						
-						//console.log('Финишные номера не совпали с ' + x);
 					}
 						return -1;
 				};
 					let act =+ prompt('Вариант ' + y + '\n' + x[y].text + '\nВаш выбор: \n' + 	x[y].answer[1] + '\n' + x[y].answer[2]); // Получение ответа игрока
-					console.log('Выбран ответ ' + act);
-					console.log('Переходим на ' + x[y].jump[act]);
+					//console.log('Выбран ответ ' + act);
+					//console.log('Переходим на ' + x[y].jump[act]);
 					if (checkFinal(x[y].jump[act]) >= 0)	{	// Проверка на соответствие финишным номерам
-						//console.log('Здесь должна быть обработка финиша');
 						alert (x[y].text);
 						alert ('До новых встреч!');
-						return ;						
+						return false;						
 					}
 					goToBranch (x[y].jump[act]); 
 			};
@@ -282,7 +277,7 @@
 		var letsPlay = confirm('Сыграем?');
 		if (letsPlay == true)	{
 			console.log('Игра началась');
-			goToBranch (0);
+			goToBranch(0);							
 			alert('На сегодня хватит!');
 		}
 		
